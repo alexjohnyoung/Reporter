@@ -1,0 +1,9 @@
+"AddonInfo"
+{
+	"name"		"Reporter"
+	"version"	"1.0"
+	"up_date"	"4/4/13"
+	"author_name"	"Tyguy"
+	"author_email"	""
+	"info"		""
+}

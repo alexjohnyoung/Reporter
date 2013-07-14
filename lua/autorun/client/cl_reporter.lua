@@ -1,0 +1,80 @@
+-- Reporter by Tyguy
+
+net.Receive("reporter_sendtext", function()
+chat.AddText(Color(255, 255, 255), net.ReadString())
+end )
+
+net.Receive("reporter_openmenu", function()
+local name = net.ReadString()
+local id = net.ReadString()
+local ip = net.ReadString()
+
+local Panel = vgui.Create( "DFrame" )
+Panel:SetPos( 800, 400 )
+Panel:SetSize( 300, 130 )
+Panel:SetTitle( "Report Player" )
+Panel:ShowCloseButton( true )
+Panel:SetVisible( true )
+Panel:MakePopup()
+Panel.Paint = function( self, w, h )
+draw.RoundedBox( 8, 0, 0, 300, 150, Color( 0, 0, 0, 200 ) )
+end
+
+local Text = vgui.Create( "DTextEntry", Panel )
+Text:SetPos( 90,30 )
+Text:SetTall( 17 )
+Text:SetWide( 200 )
+Text:SetEnterAllowed( true )
+
+local Text1 = vgui.Create( "DTextEntry", Panel )
+Text1:SetPos( 90,50 )
+Text1:SetTall( 17 )
+Text1:SetWide( 200 )
+Text1:SetEnterAllowed( true )
+
+local Text2 = vgui.Create( "DTextEntry", Panel )
+Text2:SetPos( 90, 70 )
+Text2:SetTall( 17 )
+Text2:SetWide( 200 )
+Text2:SetEnterAllowed( true )
+
+local NameHere = vgui.Create("DLabel", Panel)
+NameHere:SetPos(40,30) 
+NameHere:SetColor(Color(255, 255, 255 )) 
+NameHere:SetFont("ChatFont")
+NameHere:SetText("Name:") 
+NameHere:SizeToContents() 
+
+local IDHere = vgui.Create("DLabel", Panel)
+IDHere:SetPos(10, 50) 
+IDHere:SetColor(Color(255, 255, 255)) 
+IDHere:SetFont("ChatFont")
+IDHere:SetText("Steam ID:") 
+IDHere:SizeToContents() 
+
+local ReasonHere = vgui.Create("DLabel", Panel)
+ReasonHere:SetPos(25, 70) 
+ReasonHere:SetColor(Color(255, 255, 255)) 
+ReasonHere:SetFont("ChatFont")
+ReasonHere:SetText("Reason:") 
+ReasonHere:SizeToContents() 
+
+
+local Submit = vgui.Create( "DButton" )
+Submit:SetParent( Panel ) 
+Submit:SetText( "Submit" )
+Submit:SetPos( 90, 90 )
+Submit:SetSize( 100, 30 )
+Submit.DoClick = function()
+chat.AddText(Color(255, 255, 255), "Thank you for your report!")
+Panel:SetVisible(false)
+net.Start("reporter_sendreport")
+net.WriteString(name)
+net.WriteString(id)
+net.WriteString(Text:GetValue())
+net.WriteString(Text1:GetValue())
+net.WriteString(Text2:GetValue())
+net.SendToServer()
+end
+end )
+
