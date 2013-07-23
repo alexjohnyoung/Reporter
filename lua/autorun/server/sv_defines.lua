@@ -5,6 +5,10 @@ BombPropsBlocked = CreateClientConVar(tagre.."_blockbombs", 1, true, false) --En
 DamageLog = CreateClientConVar(tagre.."_damagelogcons", 1, true, false) --Enable/disable to log damage
 DamageLogSaving = CreateClientConVar(tagre.."_damagelogsaving", 1, true, false) --If logging damage, enable this to save it in a file.
 
+Reporter = {}
+Reporter.KickPlayer = false --Should the player be kicked if he has over 3/#propkillwarnings propkill warnings
+Reporter.AlertAdmins = true --Should the admins be alerted? (RECOMMENDED)
+
 AdvertReporter = "This server is running Tyguy's Reporter System" --Don't change this please.
 
 local Ent = FindMetaTable("Entity") --Meta Table of Entity

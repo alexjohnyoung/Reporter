@@ -64,12 +64,20 @@ hook.Add("PlayerShouldTakeDamage", "reporter_playertookdamage", function(victim,
 							net.Send(r)
 							end
 						end
-					else
+					elseif d.PropKillAttemptWarnings >= PropKillWarnings:GetInt() and Reporter.KickPlayer then
 					d:Kick(d.PropKillAttemptWarnings.."/"..PropKillWarnings:GetInt().." propkill warnings.")
 						for k,v in pairs(player.GetAll()) do
 						net.Start("reporter_sendtext")
 						net.WriteString("Player "..d:Nick().." has been kicked for reaching the propkill warnings limit ("..d:SteamID()..")")
 						net.Send(v)
+						end
+					elseif d.PropKillAttemptWarnings >= PropKillWarnings:GetInt() and Reporter.AlertAdmins then
+						for k,v in pairs(player.GetAll()) do
+							if v:IsAdmin() then
+							net.Start("reporter_sendtext")
+							net.WriteString(d:Nick().." has reached over the propkill warnings!")
+							net.Send(v)
+							end
 						end
 					end
 				end
