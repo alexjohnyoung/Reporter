@@ -85,7 +85,7 @@ hook.Add("PlayerShouldTakeDamage", "reporter_playertookdamage", function(victim,
 		return false
 		end
 	end
-	if string.find(attacker:GetClass(), "gmod_*") || string.find(attacker:GetClass(), "wire_*") then
+	if string.find(attacker:GetClass(), "gmod_*") || string.find(attacker:GetClass(), "wire_*") || string.find(attacker:GetClass(), "vehicle_*" then
 	return false
 	end
 end )
